@@ -54,7 +54,7 @@ int main(){
         
         if(FD_ISSET(listenfd, &after_set)){
             cli_addr_len=sizeof(cli_addr);
-            connfd=Accept(listenfd,(struct sockaddr *)cli_addr,&cli_addr_len);
+            connfd=Accept(listenfd,(struct sockaddr *)&cli_addr,&cli_addr_len);
             printf ("reveived from %s at PORT %d\n",inet_ntop(AF_INET,&cli_addr.sin_addr,str,sizeof(str)),ntohs(cli_addr.sin_port));
         }
         //
