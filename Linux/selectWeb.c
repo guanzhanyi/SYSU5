@@ -16,16 +16,16 @@ int main(){
     int nready,client[FD_SETSIZE];//自定义数组client,防止遍历1024哥文件描述符
     char buf[BUFSIZ],str[INET_ADDRSTRLEN];
 
-    struxt sockaddr_in cli_addr,serv_addr;
+    struct sockaddr_in cli_addr,serv_addr;
     socklen_t cli_addr_len;
     fd_set after_set,before_set;
 
     listenfd =Socket(AF_INET,SOCK_STREAM,0);
     int opt=1;
-    // SO_REUSEAD 允许重用本地IP和端口
+    // SO_REUSEADDR 允许重用本地IP和端口
     //SOL_SOCKET 套接字级别
     //获取或者设置与某个套接字关联的选项。
-    setsockopt(listenfd,SOL_SOCKET,SO_REUSEAD,&opt,sizeof(opt));
+    setsockopt(listenfd,SOL_SOCKET,SO_REUSEADDR,&opt,sizeof(opt));
 
     bzero(&serv_addr, sizeof(serv_addr));
     serv_addr.sin_family=AF_INET;
