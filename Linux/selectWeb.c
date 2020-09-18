@@ -2,8 +2,10 @@
 #include<sys/select.h>
 #include<sys/time.h>
 #include<sys/types.h>
+#include<sys/socket.h>
 #include<unistd.h>
 #include<arpa/inet.h>
+#include<stdio.h>
 
 #define MAXLINE 80
 #define SERV_PORT 9876
@@ -25,12 +27,12 @@ int main(){
     //获取或者设置与某个套接字关联的选项。
     setsockopt(listenfd,SOL_SOCKET,SO_REUSEAD,&opt,sizeof(opt));
 
-    bzero(&servaddr, sizeof(servaddr));
+    bzero(&serv_addr, sizeof(serv_addr));
     serv_addr.sin_family=AF_INET;
     serv_addr.sin_addr.s_addr = htonl(INADDR_ANY);                               //
     serv_addr.sin_port = htons(SERV_PORT);
 
-    Bind(listenfd, (struct sockaddr *)&servaddr, sizeof(servaddr));
+    Bind(listenfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr));
     Listen(listenfd, 128);                                                      // 设置
 
     maxfd=listenfd;
