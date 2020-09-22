@@ -17,7 +17,7 @@ public:
     sem(){
         if(sem_init(&m_sem,0,0)!=0){
             //构造函数没有返回值,通过抛出异常来报告错误
-            throw srd::exception();
+            throw std::exception();
         }
     }
     ~sem(){
@@ -55,7 +55,7 @@ public:
 
     //上锁
     bool lock(){
-        return pthread_mutex_lock(&m-m_mutex)==0;
+        return pthread_mutex_lock(&m_mutex)==0;
     }
 
     //解锁
@@ -76,7 +76,7 @@ public:
         if(pthread_cond_init(&m_cond,NULL)!=0){
             //构造函数一旦出现问题,就应该理解释放已经成功分配了的资源
             pthread_mutex_destroy(&m_mutex);
-            throw std:exception();
+            throw std::exception();
         }
     }
 
